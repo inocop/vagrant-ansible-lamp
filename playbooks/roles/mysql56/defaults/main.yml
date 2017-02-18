@@ -1,0 +1,18 @@
+---
+root_password: root
+
+my_cnf:
+  file: /etc/my.cnf
+  params:
+    - section: mysqld
+      option:  skip-character-set-client-handshake
+      value:
+    - section: mysqld
+      option:  character-set-server
+      value:   utf8 
+    - section: mysqld
+      option:  collation-server
+      value:   utf8_general_ci
+    - section: mysqld
+      option:  init-connect
+      value:   SET NAMES utf8

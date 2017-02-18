@@ -1,0 +1,28 @@
+---
+- name: "Add repository"
+  become: yes
+  yum: name={{item}}
+  with_items:
+    - http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
+
+- name: "Install mysql"
+  yum: "name={{ item }} enablerepo=mysql56-community state=present"
+  with_items:
+    - mysql-server
+
+- name: "Add parameter to my.cnf"
+  ini_file: >-
+            dest={{ my_cnf.file }}
+            backup=yes
+            state=present
+            section={{ item.section }}
+            option={{ item.option }}
+            value={{ item.value }}
+  with_items: "{{ my_cnf.params }}"
+
+- name: "mysql start"
+  service: name=mysqld state=restarted enabled=yes
+
+- name: "Set root password"
+  shell: "/usr/bin/mysqladmin -u root password {{ root_password }}"
+  ignore_errors: yes

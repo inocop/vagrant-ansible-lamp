@@ -1,0 +1,2 @@
+[vagrants]
+config ansible_connection=local

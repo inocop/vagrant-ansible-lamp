@@ -1,0 +1,13 @@
+---
+- name: "Setup httpd.conf"
+  template: "backup=yes src=httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf"
+  notify:
+    - "stopped httpd"
+    - "started httpd"
+
+- name: "Delete welcome.conf"
+  file: "path=/etc/httpd/conf.d/welcome.conf state=absent"
+  notify:
+    - "stopped httpd"
+    - "started httpd"
+

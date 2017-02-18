@@ -1,0 +1,6 @@
+.project
+.settings
+.buildpath
+.DS_Store
+.vagrant/
+Thumbs.db

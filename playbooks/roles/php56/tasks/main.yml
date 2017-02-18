@@ -1,0 +1,21 @@
+---
+- name: "Add php repository"
+  become: yes
+  yum: name={{item}}
+  with_items:
+    - http://ftp-srv2.kddilabs.jp/Linux/distributions/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    - http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+
+- name: "Install PHP"
+  become: yes
+  yum: "name={{item}} enablerepo=remi-php56 state=present"
+  with_items:
+    - php
+    - php-mbstring
+    - php-mysql
+  notify: restart httpd
+
+- name: "Custom php.ini"
+  template: src=custom_php.ini.j2
+            dest=/etc/php.d/
+            owner=vagrant group=vagrant mode=0644

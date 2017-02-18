@@ -1,0 +1,26 @@
+---
+- name: "Install libselinux-python"
+  yum: "name=libselinux-python state=installed"
+
+- name: "Disable SELinux"
+  become: yes
+  selinux: "state=disabled"
+
+- name: Setup iptables
+  blockinfile:
+    dest: "/etc/sysconfig/iptables"
+    create: yes
+    backup: yes
+    insertbefore: "-A INPUT -j REJECT --reject-with icmp-host-prohibited"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item }}"
+    block: "-A INPUT -m state --state NEW -m tcp -p tcp --dport {{ item }} -j ACCEPT"
+  with_items:
+    - 22
+    - 80
+    - 443
+  notify:
+    - "restart iptables"
+
+- name: "yum update"
+  yum: "name=* state=latest disable_gpg_check=yes"
+

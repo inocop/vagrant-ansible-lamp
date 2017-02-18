@@ -1,0 +1,8 @@
+---
+- hosts: vagrants
+  become: true
+  roles:
+    - role: common
+    - role: httpd
+    - role: php56
+    - role: mysql56
