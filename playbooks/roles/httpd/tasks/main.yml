@@ -1,4 +1,7 @@
 ---
+- name: "Install httpd"
+  yum: name=httpd
+
 - name: "Setup httpd.conf"
   template: "backup=yes src=httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf"
   notify:
