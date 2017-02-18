@@ -13,7 +13,7 @@
     - php
     - php-mbstring
     - php-mysql
-  notify: restart httpd
+  notify: "restart httpd"
 
 - name: "Custom php.ini"
   template: src=custom_php.ini.j2
