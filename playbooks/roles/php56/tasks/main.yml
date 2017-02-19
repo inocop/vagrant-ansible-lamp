@@ -13,9 +13,11 @@
     - php
     - php-mbstring
     - php-mysql
-  notify: "restart httpd"
+  notify:
+    - "stopped httpd"
+    - "started httpd"
 
 - name: "Custom php.ini"
   template: src=custom_php.ini.j2
-            dest=/etc/php.d/
+            dest=/etc/php.d/custom_php.ini
             owner=vagrant group=vagrant mode=0644
