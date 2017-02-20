@@ -1,0 +1,13 @@
+NameVirtualHost *:80
+
+<VirtualHost *:80>
+    ServerName *
+    ServerAdmin root@localhost.localdomain
+    DocumentRoot "/vagrant/src"
+    <Directory "/vagrant/src">
+        AllowOverride All
+        Options FollowSymLinks
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>

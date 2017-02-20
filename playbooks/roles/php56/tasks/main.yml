@@ -20,4 +20,4 @@
 - name: "Custom php.ini"
   template: src=custom_php.ini.j2
             dest=/etc/php.d/custom_php.ini
-            owner=vagrant group=vagrant mode=0755
+            owner=root group=root mode=0644

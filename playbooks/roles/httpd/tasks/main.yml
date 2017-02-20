@@ -8,9 +8,14 @@
     - "stopped httpd"
     - "started httpd"
 
+- name: "Setup vhost.conf"
+  template: "backup=yes src=vhost.conf.j2 dest=/etc/httpd/conf.d/vhost.conf"
+  notify:
+    - "stopped httpd"
+    - "started httpd"
+
 - name: "Delete welcome.conf"
   file: "path=/etc/httpd/conf.d/welcome.conf state=absent"
   notify:
     - "stopped httpd"
     - "started httpd"
-

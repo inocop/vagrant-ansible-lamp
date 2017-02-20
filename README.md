@@ -15,11 +15,6 @@ $ vagrant --version
 Vagrant 1.8.1
 ```
 
-### Vagarant plugin
-```
-$ vagrant plugin install vagrant-vbguest
-```
-
 ## Start (ansible run on hostOS)
 ```
 $ git clone https://github.com/inocop/vagrant-ansible-lamp.git
