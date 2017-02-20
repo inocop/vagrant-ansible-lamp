@@ -7,8 +7,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 80, host: 8888, id: "http"
   config.vm.network :forwarded_port, guest: 443, host: 4444, id: "https"
   config.vm.hostname = "localhost.localdomain"
-  config.vm.synced_folder "./src", "/var/www/html", :mount_options => ['dmode=775', 'fmode=664']
-  config.vm.synced_folder "./src", "/vagrant", :mount_options => ['dmode=775', 'fmode=664']
+  config.vm.synced_folder "./src", "/var/www/html", :mount_options => ['dmode=777', 'fmode=777']
+  config.vm.synced_folder "./src", "/vagrant", :mount_options => ['dmode=777', 'fmode=777']
 
   ### Workaround on (under vagrant v.1.8.1 & over ansible v.2)
   begin

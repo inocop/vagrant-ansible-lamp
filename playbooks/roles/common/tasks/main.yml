@@ -11,6 +11,34 @@
   notify:
     - "restart iptables"
 
+- name: "Allow mail"
+  blockinfile:
+    dest: "/etc/sysconfig/iptables"
+    create: yes
+    backup: yes
+    insertafter: "# ansible blockinfile"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item }}"
+    block: "-A RH-Firewall-1-INPUT -p {{ item }} -j ACCEPT"
+  with_items:
+    - 50
+    - 51
+  notify:
+    - "restart iptables"
+
+- name: "Allow http and https"
+  blockinfile:
+    dest: "/etc/sysconfig/iptables"
+    create: yes
+    backup: yes
+    insertafter: "# ansible blockinfile"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item }}"
+    block: "-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport {{ item }} -j ACCEPT"
+  with_items:
+    - 80
+    - 443
+  notify:
+    - "restart iptables"
+
 - name: "yum update"
   yum: "name=* state=latest disable_gpg_check=yes"
 
