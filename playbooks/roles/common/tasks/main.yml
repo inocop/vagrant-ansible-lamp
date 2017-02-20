@@ -25,6 +25,7 @@
   notify:
     - "restart iptables"
 
-- name: "yum update"
-  yum: "name=* state=latest disable_gpg_check=yes"
+## If necessary
+#- name: "yum update"
+#  yum: "name=* state=latest disable_gpg_check=yes"
 
