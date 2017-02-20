@@ -11,20 +11,6 @@
   notify:
     - "restart iptables"
 
-- name: "Allow mail"
-  blockinfile:
-    dest: "/etc/sysconfig/iptables"
-    create: yes
-    backup: yes
-    insertafter: "# ansible blockinfile"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item }}"
-    block: "-A RH-Firewall-1-INPUT -p {{ item }} -j ACCEPT"
-  with_items:
-    - 50
-    - 51
-  notify:
-    - "restart iptables"
-
 - name: "Allow http and https"
   blockinfile:
     dest: "/etc/sysconfig/iptables"
